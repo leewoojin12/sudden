@@ -16,7 +16,7 @@ import java.util.List;
 public class MemberRepository {
 
 
-    private  final EntityManager em;
+    private final EntityManager em;
 
     public void save(Member member) {
         em.persist(member);
@@ -42,6 +42,10 @@ public class MemberRepository {
     }
 
 
-
-
+    public boolean existsByNickname(String nickname) {
+        Long count = em.createQuery("select count(m) from Member m where m.nickname = :nickname", Long.class)
+                .setParameter("nickname", nickname)
+                .getSingleResult();
+        return count > 0;
+    }
 }

@@ -214,24 +214,23 @@
 
               <!-- Modal body -->
               <div class="modal-body">
-                <form  th:action="@{/login}" th:object="${Userlogin}" method="post" class="was-validated">
-
+                <form id="loginForm" th:action="@{/login}" th:object="${Userlogin}" method="post" class="was-validated">
                   <div class="form-group">
-                    <label for="nickname">아이디  </label>
+                    <label for="nickname">아이디</label>
                     <input type="text" class="form-control" id="Userid" placeholder="Enter ID" name="nickname" required>
                     <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
+                    <div class="invalid-feedback">아이디를 입력해주세요.</div>
                   </div>
                   <div class="form-group">
-                    <label for="password">비밀번호 </label>
+                    <label for="password">비밀번호</label>
                     <input type="password" class="form-control" id="pw" placeholder="Enter Password" name="password" required>
                     <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
+                    <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
                   </div>
                   <button type="submit" class="btn btn-primary" style="margin-left:50%;">로그인</button>
-                  <button type="button" class="btn btn-secondary">회원가입</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
                 </form>
+
               </div>
 
             </div>
@@ -257,19 +256,15 @@
                   <div class="form-group">
                     <label for="username">이름  </label>
                     <input type="text" class="form-control" id="username" placeholder="Enter ID" name="username" required>
-                    <div class="valid-feedback">중복 없음</div>
-                    <div class="invalid-feedback">빈칸 없이 입력해주세요</div>
                   </div><div class="form-group">
                   <label for="nickname">아이디  </label>
                   <input type="text" class="form-control" id="nickname" placeholder="Enter ID" name="nickname" required>
-                  <div class="valid-feedback">중복 없음</div>
-                  <div class="invalid-feedback">빈칸 없이 입력해주세요</div>
+                  <div id="nicknameCheck" class="text-danger"></div> <!-- 중복 검사 결과 -->
+
                 </div>
                   <div class="form-group">
                     <label for="password">비밀번호 </label>
                     <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" required>
-                    <div class="valid-feedback">입력</div>
-                    <div class="invalid-feedback">빈칸 없이 입력해주세요</div>
                   </div>
                   <button type="submit" class="btn btn-secondary">회원가입</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
@@ -340,45 +335,6 @@
   </div>
 </div>
 
-<!--
-&lt;!&ndash; 로그인 모달 &ndash;&gt;
-<div id="loginModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>로그인</h2>
-    <form>
-      <label for="loginUsername">아이디:</label>
-      <input type="text" id="loginUsername" name="username" required>
-      <label for="loginPassword">비밀번호:</label>
-      <input type="password" id="loginPassword" name="password" required>
-      <button type="submit">로그인</button>
-    </form>
-  </div>
-</div>
-<div id="signUpModal" class="modal">
-  <div class="modal-content">
-    <span class="close-signup">&times;</span>
-    <h2>회원가입</h2>
-    <form action="/api/signup" method="post">
-      <div>
-        <label for="username">사용자 이름: </label>
-        <input type="text" id="username" name="username" required>
-      </div>
-      <div>
-        <label for="nickname">닉네임: </label>
-        <input type="text" id="nickname" name="nickname" required>
-      </div>
-      <div>
-        <label for="password">비밀번호: </label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <button type="submit">회원가입</button>
-    </form>
-
-  </div>
-</div>
--->
-
 
 
 
@@ -387,6 +343,59 @@
 
 
 <script>
+
+  $(document).ready(function () {
+
+    // Nickname 중복 검사
+    $("#nickname").blur(function () {
+    let signupButton = $(".btn-secondary");
+        let nickname = $(this).val();
+        if (nickname !== "") {
+            $.ajax({
+                url: "/checkNickname", // 서버에서 중복 검사 요청을 처리할 경로
+                type: "GET",
+                data: {nickname: nickname},
+                success: function (response) {
+                    if (response === "exists") {
+                        $("#nicknameCheck").text("이미 존재하는 아이디입니다.");
+                        signupButton.prop("disabled", true);
+                    } else if(response === "available"){
+                        $("#nicknameCheck").text("사용 가능한 아이디입니다.");
+                        signupButton.prop("disabled", false);
+                    }
+                },
+                error: function () {
+                    $("#nicknameCheck").text("중복 확인 중 오류가 발생했습니다.");
+                    signupButton.prop("disabled", true);
+                }
+            });
+        }
+    });
+});
+ $("#loginForm").on("submit", function (event) {
+        event.preventDefault(); // 기본 제출 이벤트 막기
+
+        $.ajax({
+            url: "/login",
+            type: "POST",
+            contentType: "application/json", // JSON 형식으로 전송
+            data: JSON.stringify({
+                nickname: $("#Userid").val(),
+                password: $("#pw").val()
+            }),
+            success: function (response) {
+                if (response.success) {
+                    alert(response.message);
+                    $("#login").modal('hide'); // 로그인 성공 시 모달 닫기
+                } else {
+                    alert(response.message); // 로그인 실패 시 메시지 출력
+                }
+            },
+            error: function () {
+                alert("로그인 중 오류가 발생했습니다."); // 오류 처리
+            }
+        });
+    });
 
 </script>
 
