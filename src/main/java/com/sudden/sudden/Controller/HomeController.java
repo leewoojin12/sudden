@@ -1,23 +1,16 @@
     package com.sudden.sudden.Controller;
 
-    import com.sudden.sudden.Member;
     import com.sudden.sudden.Repository.MemberRepository;
-    import com.sudden.sudden.UsercreateForm;
+    import com.sudden.sudden.User.UsercreateForm;
     import com.sudden.sudden.MemberService;
-    import com.sudden.sudden.Userlogin;
     import jakarta.validation.Valid;
     import lombok.Getter;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
-    import org.springframework.http.ResponseEntity;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.validation.BindingResult;
     import org.springframework.web.bind.annotation.*;
-
-    import java.util.HashMap;
-    import java.util.List;
-    import java.util.Map;
 
 
     @Slf4j
@@ -32,102 +25,97 @@
 
         @RequestMapping("/")
         public String home(Model model) {
-            model.addAttribute("memberForm", new UsercreateForm());
-            model.addAttribute("Userlogin", new Userlogin());
+
             return "index";
         }
         @GetMapping("/Sign")
-        public String createForm(Model model){
-            model.addAttribute("memberForm ", new UsercreateForm());
-
-
-            return "index";
+        public String createForm(Model model) {
+            model.addAttribute("memberForm", new UsercreateForm());
+            return "signup";  // signup.html 페이지로 이동
         }
-
-       /* @PostMapping("/login")
-        @ResponseBody
-        public String login(@Valid Userlogin login){
-
-            boolean mem = memberService.validateMember(login);
-
-            System.out.println(" 결과 "  + mem);
-            if(mem==false){
-
-                return "";
-            }
-
-            return "redirect:";
-        }
-*/
-       @PostMapping("/login")
-       public ResponseEntity<Map<String, Object>> login(@ModelAttribute Userlogin userlogin) {
-           Map<String, Object> response = new HashMap<>();
-           System.out.println(userlogin + " 불러온 값 ");
-
-           // 로그인 로직 (예: 사용자 인증)
-           boolean mem = memberService.validateMember(userlogin);
-
-           if (mem) {
-               response.put("success", true);
-               response.put("message", "로그인 성공!");
-               // response.put("user", memberService.getUserInfo(userlogin.getNickname())); // 사용자 정보
-           } else {
-               response.put("success", false);
-               response.put("message", "아이디 또는 비밀번호 가 잘못되었습니다.");
-           }
-           System.out.println(response);
-
-           return ResponseEntity.ok(response);
-       }
-
-
-        @GetMapping("/test")
-        public void print(Member member){
-            List<Member> members= memberRepository.findAll();
-            System.out.println("멤버 : "+ members);
-            System.out.println(member);
-
-
-        }
-
-        @GetMapping("/checkNickname")
-        @ResponseBody
-        public String checkNickname(@RequestParam("nickname") String nickname) {
-            boolean exists = memberService.checkNicknameExists(nickname);
-            System.out.println(exists+ "중복 검사입니다."+(exists ? "e" : "a"));
-            return exists ? "exists" : "available";
-        }
-
-
         @PostMapping("/Sign")
-        public String create(@Valid UsercreateForm form , BindingResult result , Model model){
+        public String create(@Valid UsercreateForm form , BindingResult result  ){
 
             System.out.println("가입자 : " + form);
 
 
             try {
 
-                Member member = new Member();
-                member.setUsername(form.getUsername());
-                member.setPassword(form.getPassword());
-                member.setNickname(form.getNickname());
-
-                memberService.join(member);
-                System.out.println(member);
+                memberService.join(form.getUsername(), form.getNickname() , form.getPassword());
 
                 return "redirect:/";
 
 
             } catch (IllegalStateException e) {
                 e.printStackTrace();
-                System.out.println("중복된 사용자");
-                result.reject("signupFailed" , "이미 등록된 123사용자입니다.");
+
                 return "index";
             }
 
 
 
         }
+
+
+
+
+        @GetMapping("/login")
+        public String login() {
+
+            return "login.html";  // login.html 페이지로 이동
+        }
+
+
+
+
+        /*@PostMapping("/login")
+        public String login(@Valid Userlogin login, BindingResult bindingResult) {
+
+            System.out.println("요청은 되는듯@@@@@@@@@@@@@@@@@2");
+            if (bindingResult.hasErrors()) {
+                return "asd2";  // 유효성 검사 실패 시 다시 로그인 페이지로 돌아감
+
+            }
+
+            try {
+                Member mem = memberService.validateMember(login);  // 로그인 검증
+
+
+                return "index";  // 메인 페이지 또는 대시보드로 리다이렉트
+            } catch (RuntimeException e) {
+
+                e.printStackTrace();
+
+*//*
+                model.addAttribute("loginError", e.getMessage());  // 오류 메시지 모델에 추가
+*//*
+                return "asd";  // 로그인 실패 시 다시 로그인 페이지로
+            }
+        }*/
+
+
+        @GetMapping("/test")
+        public String home(){
+
+
+
+            return "redirect:/";
+
+
+        }
+
+
+
+        // 중복검사
+        @GetMapping("/checkNickname")
+        @ResponseBody
+        public String checkNickname(@RequestParam("nickname") String nickname) {
+            boolean exists = memberService.checkNicknameExists(nickname);
+            return exists ? "exists" : "available";
+        }
+
+
+
 
 
 

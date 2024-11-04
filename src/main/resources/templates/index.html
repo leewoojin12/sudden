@@ -1,285 +1,15 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sudden Attack Marketplace</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-  <!-- Popper JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-  <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f8f8f8;
-    }
-    .header {
-        padding: 15px;
-        text-align: center;
-        color: white;
-        position: relative;
-        <!--모달 설정-->
-
-
-    }
-    .header h1 {
-        margin: 0;
-    }
-    .login-btn, .signup-btn {
-        position: absolute;
-        right: 120px;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: #ff6347;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: background-color 0.3s ease;
-    }
-    .signup-btn {
-        right: 20px;
-        background-color: #4682b4;
-    }
-    .login-btn:hover, .signup-btn:hover {
-        background-color: #ff4500;
-    }
-    .signup-btn:hover {
-        background-color: #1e90ff;
-    }
-    .banner {
-        background-color: #444;
-        color: white;
-        text-align: center;
-        padding: 40px 20px;
-        margin-bottom: 20px;
-        position: relative;
-    }
-    .banner h2 {
-        margin: 0;
-        font-size: 24px;
-    }
-    .banner p {
-        margin-top: 10px;
-        font-size: 16px;
-    }
-    .container {
-        display: flex;
-        flex-direction: row;
-        margin: 0 auto;
-        width: 90%;
-        max-width: 1200px;
-    }
-    .sidebar {
-        width: 20%;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .sidebar h3 {
-        margin-bottom: 15px;
-        font-size: 18px;
-    }
-    .sidebar ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    .sidebar ul li {
-        margin-bottom: 10px;
-        font-size: 16px;
-    }
-    .sidebar .filter {
-        margin-top: 20px;
-    }
-    .content {
-        width: 75%;
-        margin-left: 5%;
-    }
-    .product-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .product-item {
-        width: 30%;
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        padding: 20px 10px;
-        transition: transform 0.2s;
-    }
-    .product-item:hover {
-        transform: translateY(-5px);
-    }
-    .product-item img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 5px;
-        margin-bottom: 15px;
-    }
-    .product-item h3 {
-        margin: 0;
-        font-size: 18px;
-        color: #333;
-        margin-bottom: 10px;
-    }
-    .product-item p {
-        font-size: 16px;
-        color: #888;
-    }
-    .filter select {
-        width: 100%;
-        padding: 8px;
-        font-size: 14px;
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-
-
-    /* 반응형 처리 */
-    @media screen and (max-width: 768px) {
-        .container {
-            flex-direction: column;
-            width: 100%;
-        }
-        .sidebar {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        .content {
-            width: 100%;
-            margin-left: 0;
-        }
-        .product-item {
-            width: 48%;
-        }
-    }
-
-    @media screen and (max-width: 480px) {
-        .product-item {
-            width: 100%;
-        }
-    }
-  </style>
 </head>
 <body>
-
-
-
-
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <!-- Brand -->
-  <a class="navbar-brand" action="/test"   href="">Sudden Attack Market</a>
-
-  <!-- Toggler/collapsibe Button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <!-- Navbar links -->
-  <div class="collapse navbar-collapse " id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#login">
-          로그인
-        </a>
-        <!-- The Modal -->
-        <div class="modal" id="login">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">로그인</h4>
-              </div>
-
-              <!-- Modal body -->
-              <div class="modal-body">
-                <form id="loginForm" th:action="@{/login}" th:object="${Userlogin}" method="post" class="was-validated">
-                  <div class="form-group">
-                    <label for="nickname">아이디</label>
-                    <input type="text" class="form-control" id="Userid" placeholder="Enter ID" name="nickname" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">아이디를 입력해주세요.</div>
-                  </div>
-                  <div class="form-group">
-                    <label for="password">비밀번호</label>
-                    <input type="password" class="form-control" id="pw" placeholder="Enter Password" name="password" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
-                  </div>
-                  <button type="submit" class="btn btn-primary" style="margin-left:50%;">로그인</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-                </form>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#sign">
-          회원가입
-        </a>
-        <div class="modal" id="sign">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">회원가입</h4>
-              </div>
-
-              <!-- Modal body -->
-              <div class="modal-body">
-                <form  th:action="@{/Sign}" th:object="${memberForm}" method="post" class="was-validated">
-                  <div class="form-group">
-                    <label for="username">이름  </label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter ID" name="username" required>
-                  </div><div class="form-group">
-                  <label for="nickname">아이디  </label>
-                  <input type="text" class="form-control" id="nickname" placeholder="Enter ID" name="nickname" required>
-                  <div id="nicknameCheck" class="text-danger"></div> <!-- 중복 검사 결과 -->
-
-                </div>
-                  <div class="form-group">
-                    <label for="password">비밀번호 </label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" required>
-                  </div>
-                  <button type="submit" class="btn btn-secondary">회원가입</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-                </form>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-</nav>
-
+<nav th:replace="~{fragments/header :: navbarFragment}"></nav>
 
 
 <div class="banner">
@@ -288,32 +18,21 @@
 </div>
 
 <div class="container">
-  <!-- Sidebar -->
   <div class="sidebar">
     <h3>카테고리</h3>
-    <ul class="no_dot">
-      <li><a href="#" class="">전체</a></li>
-      <li><a href="#" class="">무기</a></li>
-      <li><a href="#" class="">캐릭터</a></li>
-      <li><a href="#" class="">아이템</a></li>
+    <ul>
+      <li><a href="#">전체</a></li>
+      <li><a href="#">무기</a></li>
+      <li><a href="#">캐릭터</a></li>
+      <li><a href="#">아이템</a></li>
     </ul>
-
-    <div class="filter">
-      <h3>필터</h3>
-      <label for="filter">상품 속성:</label>
-      <select id="filter">
-        <option>신상 모아보기</option>
-        <option>시세보다 저렴</option>
-      </select>
-    </div>
   </div>
 
-  <!-- Content -->
   <div class="content">
     <div class="product-list">
       <div class="product-item">
         <img src="https://via.placeholder.com/150" alt="Product 1">
-        <h3>쿵쾅여신 전여진 </h3>
+        <h3>쿵쾅여신 전여1111진</h3>
         <p>300,000 SP</p>
       </div>
       <div class="product-item">
@@ -334,70 +53,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-<script>
-
-  $(document).ready(function () {
-
-    // Nickname 중복 검사
-    $("#nickname").blur(function () {
-    let signupButton = $(".btn-secondary");
-        let nickname = $(this).val();
-        if (nickname !== "") {
-            $.ajax({
-                url: "/checkNickname", // 서버에서 중복 검사 요청을 처리할 경로
-                type: "GET",
-                data: {nickname: nickname},
-                success: function (response) {
-                    if (response === "exists") {
-                        $("#nicknameCheck").text("이미 존재하는 아이디입니다.");
-                        signupButton.prop("disabled", true);
-                    } else if(response === "available"){
-                        $("#nicknameCheck").text("사용 가능한 아이디입니다.");
-                        signupButton.prop("disabled", false);
-                    }
-                },
-                error: function () {
-                    $("#nicknameCheck").text("중복 확인 중 오류가 발생했습니다.");
-                    signupButton.prop("disabled", true);
-                }
-            });
-        }
-    });
-});
- $("#loginForm").on("submit", function (event) {
-        event.preventDefault(); // 기본 제출 이벤트 막기
-
-        $.ajax({
-            url: "/login",
-            type: "POST",
-            contentType: "application/json", // JSON 형식으로 전송
-            data: JSON.stringify({
-                nickname: $("#Userid").val(),
-                password: $("#pw").val()
-            }),
-            success: function (response) {
-                if (response.success) {
-                    alert(response.message);
-                    $("#login").modal('hide'); // 로그인 성공 시 모달 닫기
-                } else {
-                    alert(response.message); // 로그인 실패 시 메시지 출력
-                }
-            },
-            error: function () {
-                alert("로그인 중 오류가 발생했습니다."); // 오류 처리
-            }
-        });
-    });
-
-</script>
 
 </body>
 </html>

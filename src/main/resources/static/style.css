@@ -1,0 +1,82 @@
+body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+    }
+    .header {
+        text-align: center;
+        color: white;
+    }
+    .login-btn, .signup-btn {
+        position: absolute;
+        right: 120px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #ff6347;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+    .signup-btn {
+        right: 20px;
+        background-color: #4682b4;
+    }
+    .login-btn:hover, .signup-btn:hover {
+        background-color: #ff4500;
+    }
+    .signup-btn:hover {
+        background-color: #1e90ff;
+    }
+    .banner {
+        background-color: #444;
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+        margin-bottom: 20px;
+    }
+    .container {
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto;
+        width: 90%;
+        max-width: 1200px;
+    }
+    .sidebar {
+        width: 20%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+    }
+    .content {
+        width: 75%;
+        margin-left: 5%;
+    }
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .product-item {
+        width: 30%;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+        padding: 20px 10px;
+        transition: transform 0.2s;
+    }
+    .product-item:hover {
+        transform: translateY(-5px);
+    }
+    .product-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }

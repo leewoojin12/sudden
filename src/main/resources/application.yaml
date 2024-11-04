@@ -1,9 +1,10 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/sudden;AUTO_SERVER=TRUE
+    url: jdbc:h2:file:~/sudden;AUTO_SERVER=TRUE
     username: sa
     password:
     driver-class-name: org.h2.Driver
+
 
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
@@ -18,6 +19,9 @@ logging:
   level:
     org.hibernate.SQL: debug #sql ? ?? DEBUG ??? ???? ?. Logger ? ??.
     org.hibernate.type: trace
+
+
+
 
 
 

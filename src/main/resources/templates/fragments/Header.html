@@ -1,0 +1,33 @@
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+
+
+
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark" th:fragment="navbarFragment">
+        <a class="navbar-brand" href="/test">Sudden Attack Market</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/purchase}">구매</a>
+            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/sell}">판매</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <span th:if="${#authorization.expression('isAuthenticated()')}" class="nav-link" th:text="${#authentication.principal.username}"></span>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/Sign}">회원가입</a>
+                </li>
+            </ul>
+        </div>
+    </nav>

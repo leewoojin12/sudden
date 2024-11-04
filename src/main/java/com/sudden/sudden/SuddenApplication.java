@@ -8,6 +8,9 @@ public class SuddenApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SuddenApplication.class, args);
+
+
+
 	}
 
 }

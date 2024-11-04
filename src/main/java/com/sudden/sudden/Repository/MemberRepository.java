@@ -1,17 +1,18 @@
 package com.sudden.sudden.Repository;
 
 
-import com.sudden.sudden.Member;
+import com.sudden.sudden.User.Member;
 import jakarta.persistence.EntityManager;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+
+
+// 쿼리식
 
 public class MemberRepository {
 
@@ -27,6 +28,8 @@ public class MemberRepository {
     }
 
 
+
+
     public List<Member> findAll() {
 
         return em.createQuery("select m from Member m  ", Member.class)
@@ -39,6 +42,12 @@ public class MemberRepository {
         return em.createQuery("select m from Member m where m.nickname = :nickname ", Member.class)
                 .setParameter("nickname", nickname)
                 .getResultList();
+    }
+    public List<Member> findByPassword(String nickname){
+        return em.createQuery("select p from Member m where m.password = :nickname ", Member.class)
+                .setParameter("nickname", nickname)
+                .getResultList();
+
     }
 
 

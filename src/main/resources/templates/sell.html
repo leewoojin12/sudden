@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudden Attack Marketplace</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+
+</head>
+<body>
+<nav th:replace="~{fragments/header :: navbarFragment}"></nav>
+
+
+<div class="banner">
+    <h2>Last Chance! 품절 임박 상품</h2>
+    <p>쇼핑을 서둘러! 남은 수량 단 하나</p>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <h3>카테고리</h3>
+        <ul>
+            <li><a href="#">전체</a></li>
+            <li><a href="#">무기</a></li>
+            <li><a href="#">캐릭터</a></li>
+            <li><a href="#">아이템</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="product-list">
+            <div class="product-item">
+                <img src="https://via.placeholder.com/150" alt="Product 1">
+                <h3>쿵쾅여신 전여1111진</h3>
+                <p>300,000 SP</p>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/150" alt="Product 2">
+                <h3>무근본한남시비충 유민호</h3>
+                <p>300 SP</p>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/150" alt="Product 3">
+                <h3>보라 세트 3일</h3>
+                <p>300,000 SP</p>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/150" alt="Product 4">
+                <h3>하연수 유니크 세트 30일</h3>
+                <p>300,000 SP</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

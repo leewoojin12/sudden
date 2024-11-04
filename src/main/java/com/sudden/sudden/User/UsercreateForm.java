@@ -1,11 +1,8 @@
-package com.sudden.sudden;
+package com.sudden.sudden.User;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.io.Console;
 
 @Data
 public class UsercreateForm {

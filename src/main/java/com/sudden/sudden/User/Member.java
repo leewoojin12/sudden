@@ -1,4 +1,4 @@
-package com.sudden.sudden;
+package com.sudden.sudden.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Entity
 @Getter
@@ -23,10 +22,15 @@ public class Member {
 
     private String username;
 
+
+    @Column(unique = true)
     private String nickname;
 
-
     private String password;
+
+
+    private int my_sp=99999999;
+
 
 
 
