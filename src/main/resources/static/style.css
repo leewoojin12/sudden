@@ -52,31 +52,35 @@ body {
         background-color: white;
         border-radius: 8px;
     }
-    .content {
-        width: 75%;
-        margin-left: 5%;
-    }
-    .product-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .product-item {
-        width: 30%;
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        text-align: center;
-        padding: 20px 10px;
-        transition: transform 0.2s;
-    }
-    .product-item:hover {
-        transform: translateY(-5px);
-    }
-    .product-item img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 5px;
-        margin-bottom: 15px;
-    }
+ .content {
+     width: 80%; /* 콘텐츠 너비 확장 */
+     margin-left: 5%;
+ }
+
+ .product-list {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: flex-start; /* 항목 간 여백 줄이기 */
+ }
+
+ .product-item {
+     width: 45%; /* 더 넓은 너비로 설정 */
+     background-color: white;
+     border: 1px solid #ddd;
+     border-radius: 8px;
+     margin-bottom: 20px;
+     text-align: center;
+     padding: 20px 10px;
+     transition: transform 0.2s;
+ }
+
+ .product-item:hover {
+     transform: translateY(-5px);
+ }
+
+ .product-item img {
+     max-width: 100%;
+     height: auto;
+     border-radius: 5px;
+     margin-bottom: 15px;
+ }

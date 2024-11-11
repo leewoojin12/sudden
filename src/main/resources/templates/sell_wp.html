@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudden Attack Marketplace - Sell Your Item</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav th:replace="~{fragments/header :: navbarFragment}"></nav>
+
+<!-- Page Title -->
+<div class="container mt-5">
+    <h2>Sell Your Item</h2>
+    <p>Post your item here for others to view and purchase.</p>
+</div>
+
+<!-- Sell Item Form -->
+<div class="container mt-4">
+    <form th:action="@{/sell/wp_upload}" th:object="${ItemForm}" method="post" enctype="multipart/form-data" class="sell-form">
+
+
+        <div class="form-group">
+            <label for="wp_name">Category</label>
+            <select class="form-control" id="wp_name" name="wp_name" required>
+                <option value="AK-47">AK-47</option>
+                <option value="TRG-21">TRG-21</option>
+                <option value="Degle">Degle</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price (SP)</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-primary">Post Item for Sale</button>
+    </form>
+</div>
+
+</body>
+</html>
