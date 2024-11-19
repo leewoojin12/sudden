@@ -1,4 +1,4 @@
-package com.sudden.sudden;
+package com.sudden.sudden.service;
 
 
 import com.sudden.sudden.Repository.MemberRepository;
@@ -38,6 +38,12 @@ public class MemberService {
 
         memberRepository.save(member);
         return member.getId();
+    }
+
+
+    public Member findmember(Long id){
+
+        return memberRepository.findOne(id);
     }
 
   /*  public Member validateMember(Userlogin userlogin) {

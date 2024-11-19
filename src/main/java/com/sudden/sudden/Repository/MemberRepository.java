@@ -30,6 +30,19 @@ public class MemberRepository {
 
 
 
+    public List<Member> findAllByNickname(String nickname) {
+        return em.createQuery("SELECT m FROM Member m WHERE m.nickname = :nickname", Member.class)
+                .setParameter("nickname", nickname)
+                .getResultList();
+    }
+
+
+
+    public Long findByUsername(String nickname) {
+        return em.createQuery("select m.id from Member m where m.nickname = :nickname", Long.class)
+                .setParameter("nickname", nickname)
+                .getSingleResult();
+    }
     public List<Member> findAll() {
 
         return em.createQuery("select m from Member m  ", Member.class)

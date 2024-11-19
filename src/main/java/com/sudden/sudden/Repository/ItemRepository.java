@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -41,6 +42,10 @@ public class ItemRepository {
                 .getResultList();
     }
 
+    public List<Item> findAllitem(Pageable pageable) {
+        return em.createQuery("select i from Item i  ", Item.class)
+                .getResultList();
+    }
 
 
 }

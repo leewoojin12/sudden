@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sudden.sudden.Repository.MemberRepository;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -53,5 +56,30 @@ public class UserSecurityService implements UserDetailsService  {
         }
 
         return new User(member.getNickname(), member.getPassword(), authorities);
+    }
+
+    public boolean isUserLoggedIn() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null && authentication.isAuthenticated() &&
+                !(authentication instanceof AnonymousAuthenticationToken);
+    }
+    public Long getloginuser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName(); // 로그인한 사용자의 username (또는 닉네임)
+            return memberRepository.findByUsername(username); // memberRepository에서 사용자 정보 가져오기
+        }
+        return null;
+    }
+
+    public Member getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String nickname = authentication.getName();  // 로그인된 사용자 이름(닉네임) 가져오기
+        List<Member> members = memberRepository.findAllByNickname(nickname);
+        if (members.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return members.get(0);
     }
 }

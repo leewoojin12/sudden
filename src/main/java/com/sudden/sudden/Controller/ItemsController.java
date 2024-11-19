@@ -5,6 +5,8 @@ import com.sudden.sudden.service.ItemService;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,7 +36,7 @@ public class ItemsController {
     }
     //판매
     @PostMapping("/wp_upload")
-    public String wp_uploadform(@Valid Item item, BindingResult result ){
+    public String wp_uploadform(@Valid Item item, BindingResult result  ,@AuthenticationPrincipal UserDetails userDetails){
         if (result.hasErrors()) {
             return "sell_wp"; // 에러가 있을 경우, 폼 페이지로 돌아감
         }
@@ -42,7 +44,8 @@ public class ItemsController {
 
 
 
-        itemService.update(item.getWp_name() , item.getPrice());
+
+        itemService.update(item.getWp_name() , item.getPrice(),userDetails.getUsername());
 
 
         System.out.println(item.getPrice());
@@ -65,6 +68,11 @@ public class ItemsController {
 
 
     //구매
+    @GetMapping("/")
+    public String   buywp(){
+
+        return null;
+    }
 
 
 }

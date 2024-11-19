@@ -1,11 +1,12 @@
 package com.sudden.sudden.User;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.sudden.sudden.Item.Item;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,9 +33,16 @@ public class Member {
     private int my_sp=99999999;
 
 
+    @OneToMany(mappedBy = "member")
+    private List<Item> items = new ArrayList<>();
 
 
 
+    //== 연관 관계 메서드 ==//
+    public void addItem(Item item) {
+        items.add(item);
+        item.setMember(this);
+    }
 
 
 

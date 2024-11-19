@@ -4,7 +4,7 @@
     import com.sudden.sudden.Repository.ItemRepository;
     import com.sudden.sudden.Repository.MemberRepository;
     import com.sudden.sudden.User.UsercreateForm;
-    import com.sudden.sudden.MemberService;
+    import com.sudden.sudden.service.MemberService;
     import com.sudden.sudden.service.ItemService;
     import jakarta.validation.Valid;
     import lombok.Getter;
@@ -16,6 +16,7 @@
     import org.springframework.web.bind.annotation.*;
 
     import java.util.List;
+    import org.springframework.data.domain.Page;
 
 
     @Slf4j
@@ -34,10 +35,15 @@
 
 
         @RequestMapping("/")
-        public String home(Model model) {
+        public String home(Model model,@RequestParam(value = "page", defaultValue = "0") int page) {
 
             List<Item> wp_nameList = itemRepository.findAll();
 
+
+            Page<Item> paging  = itemService.getList(page);
+
+
+            model.addAttribute("paging", paging);
             model.addAttribute("wp_nameList", wp_nameList);
 
             return "index";
