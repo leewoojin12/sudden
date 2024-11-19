@@ -44,6 +44,8 @@
     })
     .then(response => {
         if (response.ok) {
+            window.location.href = response.url;  // 클라이언트에서 리다이렉트 처리
+
             alert('상품이 구매되었습니다!');
         } else {
         console.log('itemId:', itemId);

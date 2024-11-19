@@ -6,6 +6,7 @@ import com.sudden.sudden.User.Member;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.awt.print.Pageable;
 import java.util.List;
@@ -23,6 +24,20 @@ public class ItemRepository {
 
     public Item findOne(Long id) {
         return em.find(Item.class, id);
+    }
+
+
+
+    @Transactional
+    public void soldout(Long id) {
+        Item item = em.find(Item.class , id);
+        if (item != null) {
+            em.remove(item);
+            em.flush();
+            System.out.println("아이템 팔렸따 ");
+        } else {
+            System.out.println("삭제할 아이템을 찾을 수 없습니다.");
+        }
     }
 
 

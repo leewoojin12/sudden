@@ -1,6 +1,7 @@
 package com.sudden.sudden.Repository;
 
 
+import com.sudden.sudden.Item.My_item;
 import com.sudden.sudden.User.Member;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,10 @@ public class OrderRepository {
 
     private final EntityManager em;
 
+    public void save(My_item my_item) {
+        em.persist(my_item);
+    }
+
 
     @Transactional
     public int set_my_sp(Long id, int my_sp) {
@@ -25,5 +30,7 @@ public class OrderRepository {
                 .setParameter("id", id)
                 .executeUpdate();
     }
+
+
 
 }

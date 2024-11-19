@@ -47,29 +47,9 @@ public class OrderController {
     public String buy_wp(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
 
 
-
-
-//        orderService.buy_item();
-
-
         orderService.buy_item(id,userDetails.getUsername());
 
 
-
-/*
-        아이템 번호 넘어와서 그 넘어온값에 대한 구매 만들건데 환불 없음 판매되면 바로 팔리는거라서 해당되는 아이템 삭제 되면서
-        사용자 아이템 리스트 만들어서 그쪽에 저장해야함 .
-        ㄴ item list
-        ㄴ sp 차감
-        ㄴ 판매 list 에서 해당 번호 인덱스 삭제
-
-
-
-
-
-
-
-*/
 
 
         System.out.println("실행은 됌" + id );

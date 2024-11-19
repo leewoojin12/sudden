@@ -2,6 +2,7 @@ package com.sudden.sudden.service;
 
 
 import com.sudden.sudden.Item.Item;
+import com.sudden.sudden.Item.My_item;
 import com.sudden.sudden.Repository.ItemRepository;
 import com.sudden.sudden.Repository.MemberRepository;
 import com.sudden.sudden.Repository.OrderRepository;
@@ -38,7 +39,10 @@ public class OrderService {
 
         List<Member> get_user_information = memberRepository.findAllByNickname(username);
         Item get_item_information = itemRepository.findOne(id);
+
+
         Member user = get_user_information.get(0);
+
         System.out.println("@@@@@@@@@@@@");
         if(get_item_information.getPrice()>user.getMy_sp()){
 
@@ -46,13 +50,32 @@ public class OrderService {
             return "구매할수 없습니다";
         }else {
 
-
+            // sp 값 받아서 저장하는거
             int updatesp = user.getMy_sp() - get_item_information.getPrice();
             user.setMy_sp(updatesp);
-            orderRepository.set_my_sp(user.getId() , user.getMy_sp());
 
+
+            orderRepository.set_my_sp(user.getId() , user.getMy_sp());
             Member a = memberRepository.findOne(user.getId());
-            System.out.println(a.getMy_sp());
+
+            // 상점 - > 내 리스트로 이동
+
+            My_item my_item = new My_item();
+            my_item.setWp_name(get_item_information.getWp_name());
+            my_item.setMember(a);
+
+            orderRepository.save(my_item);
+            System.out.println(get_item_information.getId());
+
+
+            itemRepository.soldout(get_item_information.getId());
+
+
+
+
+
+
+
 
 
         }
