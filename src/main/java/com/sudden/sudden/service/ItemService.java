@@ -1,6 +1,7 @@
 package com.sudden.sudden.service;
 
 import com.sudden.sudden.Item.Item;
+import com.sudden.sudden.Item.My_item;
 import com.sudden.sudden.Repository.ItemRepository;
 import com.sudden.sudden.Repository.MemberRepository;
 import com.sudden.sudden.Repository.WpRepository;
@@ -59,6 +60,7 @@ public class ItemService {
         return item.getId();
 
     }
+
 
 
     public Page<Item> getList(int page) {

@@ -28,15 +28,16 @@ public class ItemRepository {
 
 
 
+
+
     @Transactional
     public void soldout(Long id) {
         Item item = em.find(Item.class , id);
         if (item != null) {
             em.remove(item);
             em.flush();
-            System.out.println("아이템 팔렸따 ");
         } else {
-            System.out.println("삭제할 아이템을 찾을 수 없습니다.");
+            System.out.println("에러에러에러에러에러에러에러에러에러에러");
         }
     }
 

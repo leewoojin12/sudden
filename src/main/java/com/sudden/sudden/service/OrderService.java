@@ -5,6 +5,7 @@ import com.sudden.sudden.Item.Item;
 import com.sudden.sudden.Item.My_item;
 import com.sudden.sudden.Repository.ItemRepository;
 import com.sudden.sudden.Repository.MemberRepository;
+import com.sudden.sudden.Repository.OrderJpaRepository;
 import com.sudden.sudden.Repository.OrderRepository;
 import com.sudden.sudden.User.Member;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,12 @@ public class OrderService {
 
 
     private final OrderRepository orderRepository;
+    private final OrderJpaRepository orderJpaRepository;
+
+
+
+
+
     private final MemberRepository  memberRepository;
     private final ItemRepository itemRepository;
 
@@ -39,10 +46,7 @@ public class OrderService {
 
         List<Member> get_user_information = memberRepository.findAllByNickname(username);
         Item get_item_information = itemRepository.findOne(id);
-
-
         Member user = get_user_information.get(0);
-
         System.out.println("@@@@@@@@@@@@");
         if(get_item_information.getPrice()>user.getMy_sp()){
 
@@ -94,6 +98,19 @@ public class OrderService {
 
 
     }
+
+
+    public My_item get_item_list(Long id){
+        //TODO orderJpaRepository 로 id에 맞는 my_item 가져와야함
+
+
+
+
+        return null;
+//        return get_user_information.isEmpty() ? null: get_user_information.get(0);
+    }
+
+
 
 
 

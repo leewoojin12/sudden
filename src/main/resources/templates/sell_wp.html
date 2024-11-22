@@ -26,9 +26,7 @@
         <div class="form-group">
             <label for="wp_name">Category</label>
             <select class="form-control" id="wp_name" name="wp_name" required>
-                <option value="AK-47">AK-47</option>
-                <option value="TRG-21">TRG-21</option>
-                <option value="Degle">Degle</option>
+                <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
             </select>
         </div>
 
@@ -42,6 +40,7 @@
 
         <button type="submit" class="btn btn-primary">Post Item for Sale</button>
     </form>
+
 </div>
 
 </body>
