@@ -69,6 +69,12 @@ public class ItemService {
         Pageable pageable = PageRequest.of(page, 16, Sort.by(sorts));
         return wpRepository.findAll(pageable);
     }
+
+
+
+
+
+
     public Item getfindwp(Long id){
         return itemRepository.findOne(id);
 

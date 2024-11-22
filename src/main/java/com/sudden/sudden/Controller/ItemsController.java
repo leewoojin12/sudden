@@ -1,6 +1,7 @@
 package com.sudden.sudden.Controller;
 
 import com.sudden.sudden.Item.Item;
+import com.sudden.sudden.Item.My_item;
 import com.sudden.sudden.User.Member;
 import com.sudden.sudden.User.UserSecurityService;
 import com.sudden.sudden.service.ItemService;
@@ -9,15 +10,15 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.query.Order;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,16 +33,21 @@ public class ItemsController {
 
 
     @GetMapping("/wp_upload")
-    public String sellhome(Model model , @AuthenticationPrincipal UserDetails userDetails){
-
-        //판매 등록 시 불러올것
-        // 사용자 이름으로 id 값 찾아서 이름  member_id 값 my_item으로 넘겨줘야함
-        // member_id 값으로 my_item List 가져와서 Array 해야함
-        // Array 해서 model itemForm 에 표시해야함
+    public String sellhome(Model model , @AuthenticationPrincipal UserDetails userDetails , @RequestParam(value = "page", defaultValue = "0") int page){
         // wp_name 만 주면 됌
         Member set_user_infotmation = uss.getCurrentUser();
 
-        orderService.get_item_list(set_user_infotmation.getId());
+        Page<My_item> paging  = orderService.getList(page , set_user_infotmation.getId());
+
+        model.addAttribute("paging", paging);
+
+
+        
+
+
+
+
+
 
 
 
@@ -49,7 +55,7 @@ public class ItemsController {
             //TODO 모델 표시
 //        model.addAttribute("ItemForm",  );
 
-        return "sell_wp.html";
+        return "new_sell_page.html";
     }
     //판매
     /*@PostMapping("/wp_upload")

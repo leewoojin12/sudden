@@ -9,10 +9,16 @@ import com.sudden.sudden.Repository.OrderJpaRepository;
 import com.sudden.sudden.Repository.OrderRepository;
 import com.sudden.sudden.User.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -100,14 +106,25 @@ public class OrderService {
     }
 
 
-    public My_item get_item_list(Long id){
+    public List<My_item> get_item_list(Long id){
         //TODO orderJpaRepository 로 id에 맞는 my_item 가져와야함
 
-
-
+//            return orderJpaRepository.findById(id);
 
         return null;
+
+
+
 //        return get_user_information.isEmpty() ? null: get_user_information.get(0);
+    }
+
+    public Page<My_item> getList(int page, Long id) {
+
+
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(page, 16, Sort.by(sorts));
+        return orderJpaRepository.findAllByMemberId( id, pageable);
     }
 
 

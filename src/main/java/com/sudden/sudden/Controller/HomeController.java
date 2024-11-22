@@ -36,15 +36,17 @@
 
         @RequestMapping("/")
         public String home(Model model,@RequestParam(value = "page", defaultValue = "0") int page) {
+            /*//지울 것들
+//            List<Item> wp_nameList = itemRepository.findAll();
+            //model.addAttribute("wp_nameList", wp_nameList);
+*/
 
-            List<Item> wp_nameList = itemRepository.findAll();
+
 
 
             Page<Item> paging  = itemService.getList(page);
 
-
             model.addAttribute("paging", paging);
-            model.addAttribute("wp_nameList", wp_nameList);
 
             return "index";
         }
@@ -88,35 +90,6 @@
 
             return "login.html";  // login.html 페이지로 이동
         }
-
-
-
-
-        /*@PostMapping("/login")
-        public String login(@Valid Userlogin login, BindingResult bindingResult) {
-
-            System.out.println("요청은 되는듯@@@@@@@@@@@@@@@@@2");
-            if (bindingResult.hasErrors()) {
-                return "asd2";  // 유효성 검사 실패 시 다시 로그인 페이지로 돌아감
-
-            }
-
-            try {
-                Member mem = memberService.validateMember(login);  // 로그인 검증
-
-
-                return "index";  // 메인 페이지 또는 대시보드로 리다이렉트
-            } catch (RuntimeException e) {
-
-                e.printStackTrace();
-
-*//*
-                model.addAttribute("loginError", e.getMessage());  // 오류 메시지 모델에 추가
-*//*
-                return "asd";  // 로그인 실패 시 다시 로그인 페이지로
-            }
-        }*/
-
 
         @GetMapping("/test")
         public String home(){
