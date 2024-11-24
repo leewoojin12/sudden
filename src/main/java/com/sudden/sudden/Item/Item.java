@@ -24,17 +24,9 @@ public class Item {
 
 
 
-/*
-    @OneToMany(mappedBy = "item")
-*/
     private String wp_name;
 
 
-/*
-
-    @OneToMany(mappedBy = "item")
-    private List<Quantity> wp_quantity;
-*/
 
     private int price;
 

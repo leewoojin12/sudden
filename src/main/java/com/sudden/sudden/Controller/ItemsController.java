@@ -29,7 +29,6 @@ public class ItemsController {
     private final ItemService itemService;
     private final UserSecurityService uss;
     private final OrderService orderService;
-    private Member set_user_infotmatin;
 
 
     @GetMapping("/wp_upload")
@@ -41,8 +40,15 @@ public class ItemsController {
 
         model.addAttribute("paging", paging);
 
+        //페이지는 옴 누르면 판매 페이지 이동
+        // 가격 표시
+        // 구매 페이지 저장
+        // 판매 로직 수정
+        //판매시 돈 +
+        //
 
-        
+
+
 
 
 

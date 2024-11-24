@@ -22,7 +22,7 @@
 
     <div class="product-list">
         <div th:each="My_item , loop:${paging}" class="product-item" href="#">
-            <a href="#" th:href="@{|/Order/detail/${My_item.id}|}"> <!-- 링크를 a 태그로 감쌈 -->
+            <a href="#" th:href="@{|/Order/sell/${My_item.id}|}"> <!-- 링크를 a 태그로 감쌈 -->
 
                 <img src="https://via.placeholder.com/150" th:alt="${My_item.wp_name}" />
                 <h3 th:text="${My_item.wp_name}">Product Name</h3>

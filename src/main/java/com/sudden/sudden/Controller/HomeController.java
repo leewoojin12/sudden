@@ -36,10 +36,7 @@
 
         @RequestMapping("/")
         public String home(Model model,@RequestParam(value = "page", defaultValue = "0") int page) {
-            /*//지울 것들
-//            List<Item> wp_nameList = itemRepository.findAll();
-            //model.addAttribute("wp_nameList", wp_nameList);
-*/
+            //TODO 이름말고 돈도 표시해야함
 
 
 
@@ -77,6 +74,10 @@
 
 
         }
+
+
+
+
         @GetMapping("/purchase")
         public String buyform(){
             return "redirect:/";

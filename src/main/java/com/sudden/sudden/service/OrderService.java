@@ -45,14 +45,14 @@ public class OrderService {
 
 
 
-
-
-
     public String buy_item(Long id , String username ){
 
         List<Member> get_user_information = memberRepository.findAllByNickname(username);
         Item get_item_information = itemRepository.findOne(id);
         Member user = get_user_information.get(0);
+
+
+
         System.out.println("@@@@@@@@@@@@");
         if(get_item_information.getPrice()>user.getMy_sp()){
 
@@ -80,14 +80,6 @@ public class OrderService {
 
             itemRepository.soldout(get_item_information.getId());
 
-
-
-
-
-
-
-
-
         }
 
 
@@ -106,21 +98,19 @@ public class OrderService {
     }
 
 
-    public List<My_item> get_item_list(Long id){
+    public My_item get_item_list(Long id){
         //TODO orderJpaRepository 로 id에 맞는 my_item 가져와야함
 
-//            return orderJpaRepository.findById(id);
+        System.out.println("실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중2");
+        List<My_item> my_item = orderRepository.find_by_wp_name(id);
+        System.out.println(my_item.get(0).toString());
+        return my_item.get(0);
 
-        return null;
 
-
-
-//        return get_user_information.isEmpty() ? null: get_user_information.get(0);
     }
 
+    //내 가지고 있는 아이템
     public Page<My_item> getList(int page, Long id) {
-
-
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(page, 16, Sort.by(sorts));

@@ -1,6 +1,7 @@
 package com.sudden.sudden.Repository;
 
 
+import com.sudden.sudden.Item.Item;
 import com.sudden.sudden.Item.My_item;
 import com.sudden.sudden.User.Member;
 import jakarta.persistence.EntityManager;
@@ -22,6 +23,14 @@ public class OrderRepository {
         em.persist(my_item);
     }
 
+
+
+    public List<My_item> find_by_wp_name(Long id) {
+        System.out.println("실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중실행 중3");
+        return em.createQuery("select m from My_item m where m.id = :id", My_item.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
 
     @Transactional
     public int set_my_sp(Long id, int my_sp) {
